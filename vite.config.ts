@@ -53,9 +53,6 @@ export default defineConfig({
     manifest: true,
     outDir: "static",
     rollupOptions: {
-      // output: {
-      //   assetFileNames: `${themeRoot}/assets/[name]-[hash][extname]`,
-      // },
       input: {
         ...inputs,
         main: resolve(__dirname, "src/styles/main.scss")
