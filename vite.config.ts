@@ -9,8 +9,8 @@ import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js'
 function entryPointContent(importPath) {
   return `
 import { createApp } from 'vue'
+// @ts-ignore
 import App from '@/pages/${importPath}'
-import '@/style.css'
 
 createApp(App).mount('#app')  
   `.trim();
@@ -44,7 +44,8 @@ export default defineConfig({
   } }), vue()],
   resolve: {
     alias: {
-      "@": resolve(__dirname, "src")
+      "@": resolve(__dirname, "src"),
+      "~": resolve(__dirname, "./node_modules/"),
     }
   },
   base: themeRoot,
@@ -55,7 +56,10 @@ export default defineConfig({
       // output: {
       //   assetFileNames: `${themeRoot}/assets/[name]-[hash][extname]`,
       // },
-      input: inputs
+      input: {
+        ...inputs,
+        main: resolve(__dirname, "src/styles/main.scss")
+      }
     }
   }
 })
